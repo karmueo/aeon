@@ -1,6 +1,6 @@
-"""UDP 组播航迹 LITETime 分类应用。
+"""UDP 组播航迹 MultiRocket 分类应用。
 
-实现接收 UDP 组播报文、解析航迹数据、使用 LITETime 模型推理、发布结果。
+实现接收 UDP 组播报文、解析航迹数据、使用 MultiRocket 模型推理、发布结果。
 """
 
 import argparse
@@ -12,7 +12,7 @@ from pathlib import Path
 
 import numpy as np
 
-# 添加 radar_litetime 到路径以导入 UDP 和 apps 模块
+# 添加 radar_multirocket 到路径以导入 UDP 和 apps 模块
 RADAR_ROOT = Path(__file__).resolve().parents[1]
 if str(RADAR_ROOT) not in sys.path:
     sys.path.insert(0, str(RADAR_ROOT))

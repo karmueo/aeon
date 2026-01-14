@@ -79,7 +79,6 @@ def merge_config_with_args(
         },
         # 其他字段直接映射
         "buffer": None,
-        "normalizer": None,
         "predictor": None,
         "inference": None,
     }
@@ -117,7 +116,7 @@ def create_argument_parser() -> argparse.ArgumentParser:
         配置好的 ArgumentParser 实例。
     """
     parser = argparse.ArgumentParser(
-        description="组播航迹接收 + LITETime 预测 + 组播发布",
+        description="组播航迹接收 + MultiRocket 预测 + 组播发布",
         epilog="配置文件中的参数会被命令行参数覆盖。使用 --config 指定 YAML 配置文件。",
     )
     parser.add_argument("--config", default="", help="YAML 配置文件路径")
@@ -138,7 +137,7 @@ def create_argument_parser() -> argparse.ArgumentParser:
 
     # 预测器配置
     parser.add_argument("--model_dir", default="", help="模型目录路径")
-    parser.add_argument("--model_files", default="", help="模型文件名，逗号分隔")
+    parser.add_argument("--model_files", default="", help="模型文件名")
     parser.add_argument("--meta_file", default="", help="Meta JSON 文件路径")
     parser.add_argument("--classes", default="", help="类别名，逗号分隔")
 

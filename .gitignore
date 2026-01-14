@@ -167,3 +167,5 @@ local_code.py
 local.py
 
 */output
+*.xls
+mydataset

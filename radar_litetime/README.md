@@ -99,6 +99,45 @@ bird    123
 uav     98
 ```
 
+## 组播解析推理（实时 UDP）
+
+基于 `radar_litetime/apps/udp_litetime_predictor.py`，接收 UDP 组播报文，解析航迹并实时推理，再通过组播发布结果。
+
+**前置准备**
+- 确保仓库根目录下存在 `Time-Series-Library/`（脚本会复用其中的 `udp` 模块）。
+- 准备好训练输出的 `meta.json` 与模型目录（如 `radar_litetime/output/`）。
+
+**使用默认配置启动**
+```bash
+python -m radar_litetime.apps.udp_litetime_predictor \
+  --config radar_litetime/apps/config/default.yaml
+```
+
+**命令行覆盖配置**
+```bash
+python -m radar_litetime.apps.udp_litetime_predictor \
+  --in_group 230.1.1.22 \
+  --in_port 8002 \
+  --out_group 230.1.1.24 \
+  --out_port 8011 \
+  --meta_file radar_litetime/output/meta.json
+```
+
+**本地文件测试（不接组播）**
+```bash
+python -m radar_litetime.apps.udp_litetime_predictor \
+  --local_test \
+  --local_test_path mydataset/radar_augv3/bird/sample.xls \
+  --local_test_points 20 \
+  --meta_file radar_litetime/output/meta.json
+```
+
+**风险提示（网络配置）**
+- 组播地址/端口/网卡配置可能影响当前网络流量与端口占用。
+- 回滚方案：停止进程（Ctrl+C），恢复 `radar_litetime/apps/config/default.yaml` 为原配置，必要时释放端口或切回原网卡配置。
+
+更多参数与配置字段说明见 `radar_litetime/apps/README.md`。
+
 ## 说明
 
 - `.xls` 中存在多列数值时，会被视为多通道输入。

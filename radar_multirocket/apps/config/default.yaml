@@ -1,27 +1,27 @@
-# LITETime Predictor YAML Configuration
+# MultiRocket Predictor YAML Configuration
 # 所有参数可以通过命令行覆盖
 
 # 接收器配置 (组播接收)
 receiver:
   group: "230.1.1.22"      # 输入组播地址
   port: 8002               # 输入端口
-  iface: "192.168.1.112"         # 输入网卡接口
+  iface: "192.168.1.112"   # 输入网卡接口
   bind_ip: ""              # 绑定 IP (空表示所有)
   timeout_s: 2.0           # 接收超时时间
-  skip_checksum: true     # 跳过校验和验证
+  skip_checksum: true      # 跳过校验和验证
 
 # 发布器配置 (组播发送)
 publisher:
   group: "230.1.1.24"      # 输出组播地址
   port: 8011               # 输出端口
-  iface: "192.168.1.112"         # 输出网卡接口
+  iface: "192.168.1.112"   # 输出网卡接口
   ttl: 1                   # 组播 TTL
 
 # 预测器配置
 predictor:
-  model_dir: "radar_litetime/output"  # 模型目录路径
-  model_files: ""         # 模型文件名，逗号分隔 (为空则从 meta.json 读取)
-  meta_file: "radar_litetime/output/meta.json"  # Meta JSON 文件路径
+  model_dir: "radar_multirocket/output"  # 模型目录路径
+  model_files: ""         # 模型文件名 (为空则从 meta.json 读取)
+  meta_file: "radar_multirocket/output/meta.json"  # Meta JSON 文件路径
   classes: ""             # 类别名，逗号分隔 (为空则从 meta.json 读取)
 
 # 轨迹缓冲配置
@@ -30,10 +30,6 @@ buffer:
   min_seq_len: 20         # 最小序列长度
   max_age_s: 10.0         # 轨迹最大保留时间 (秒)
   window_step: 5          # 滑窗步长 (0=每条都推理)
-
-# 归一化配置
-normalizer:
-  stats_path: ""          # 归一化统计文件路径 (可选，为空则不归一化)
 
 # 推理配置
 inference:
